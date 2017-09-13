@@ -319,7 +319,22 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public Student[] getByBirthDate(Date date) {
 		// Add your implementation here
-		return null;
+		if(date == null)
+		{
+			throw new IllegalArgumentException("Student not found");
+		}
+		else{
+		ArrayList<Student> btw=new ArrayList<Student>();
+		for(int start=0;start<this.students.length;start++)
+		{
+			if(this.students[start].getBirthDate().compareTo(date) == 0)
+			{
+				btw.add(this.students[start]);
+			}
+		}
+		this.students= btw.toArray(new Student[btw.size()]);	
+		return this.students;
+		}
 	}
 
 	@Override
