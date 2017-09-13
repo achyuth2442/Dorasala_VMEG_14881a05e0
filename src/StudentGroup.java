@@ -1,3 +1,4 @@
+import java.util.*;
 import java.util.Date;
 
 /**
@@ -62,7 +63,7 @@ public class StudentGroup implements StudentArrayOperation {
 		{
 			throw new IllegalArgumentException("Student not exist");
 	}
-	else if(index < 0 || index >= students.length)
+	else if(index < 0 || index >= this.students.length)
 	{
 		throw new IllegalArgumentException("Student not exists");
 	}
@@ -81,7 +82,7 @@ public class StudentGroup implements StudentArrayOperation {
 		else{
 			Student[]  stued= new Student[this.students.length+1];
 			stued[0]=student;
-			for(int i=0;i<students.length;i++)
+			for(int i=0;i<this.students.length;i++)
 			{
 				stued[i+1]=students[i];
 			}
@@ -139,7 +140,7 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void remove(int index) {
 		// Add your implementation here
-		if(index < 0 || index >= students.length)
+		if(index < 0 || index >= this.students.length)
 		{
 			throw new IllegalArgumentException("Student not exist");
 		}
@@ -147,7 +148,7 @@ public class StudentGroup implements StudentArrayOperation {
 		{
 			Student[] stued= new Student[this.students.length-1];
 			int i,j=0;
-			for(i=0;i<students.length;i++)
+			for(i=0;i<this.students.length;i++)
 			{
 				if(i == index)
 				{
@@ -174,7 +175,7 @@ public class StudentGroup implements StudentArrayOperation {
 		{
 			Student[] stued= new Student[this.students.length-1];
 			int i,j=0,f=0;
-			for(i=0;i<students.length;i++)
+			for(i=0;i<this.students.length;i++)
 			{
 				if(students[i] == student)
 				{	f=1;
@@ -203,13 +204,13 @@ public class StudentGroup implements StudentArrayOperation {
 		// Add your implementation here
 		Student[] stued = new Student[students.length-index];
 		int i;
-		if(index < 0 || index >=students.length)
+		if(index < 0 || index >=this.students.length)
 		{
 			throw new IllegalArgumentException("Student not exist");
 		}
 		else
 		{
-				for(i=0;i<students.length;i++)
+				for(i=0;i<this.students.length;i++)
 			{
 				if(i == index+1)
 				{	
@@ -234,7 +235,7 @@ public class StudentGroup implements StudentArrayOperation {
 		}
 		else
 		{
-			for(int i=0;i<students.length;i++)
+			for(int i=0;i<this.students.length;i++)
 			{
 				if(students[i] == student)
 				{limit=i;
@@ -253,7 +254,7 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void removeToIndex(int index) {
 		// Add your implementation here
-		if(index < 0 || index >= students.length)
+		if(index < 0 || index >= this.students.length)
 		{
 			throw new IllegalArgumentException("Student not exist");
 		}
@@ -261,7 +262,7 @@ public class StudentGroup implements StudentArrayOperation {
 		{
 			int start=0,i;
 			Student[] stued= new Student[students.length-index];
-			for(i=index;i<students.length;i++)
+			for(i=index;i<this.students.length;i++)
 			{
 				stued[start]=students[i];
 				start=start+1;
@@ -281,7 +282,7 @@ public class StudentGroup implements StudentArrayOperation {
 		else
 		{
 			int i=0,limit=0,start=0;
-			for(i=0;i<students.length;i++)
+			for(i=0;i<this.students.length;i++)
 			{
 				if(students[i] == student)
 				{	
@@ -290,7 +291,7 @@ public class StudentGroup implements StudentArrayOperation {
 				limit=i;
 			}
 			Student[] stued=new Student[students.length-limit];
-			for(i=limit;i<students.length;i++)
+			for(i=limit;i<this.students.length;i++)
 			{
 				stued[start]=students[i];
 			}
@@ -301,9 +302,9 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void bubbleSort() {
 		// Add your implementation here
-		for(int start=0;start<students.length-1;start++)
+		for(int start=0;start<this.students.length-1;start++)
 		{
-			for(int start1=0;start1<students.length;start1++)
+			for(int start1=0;start1<this.students.length;start1++)
 			{
 				if(students[start1].getId() > students[start1+1].getId())
 				{
@@ -348,7 +349,24 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public Student[] getStudentsWithMaxAvgMark() {
 		// Add your implementation here
-		return null;
+		double max_marks=0;
+		for(int start=0 ;start<this.students.length;start++)
+		{
+			if(students[start].getAvgMark() > max_marks)
+			{
+				max_marks=students[start].getAvgMark();
+			}
+		}
+		ArrayList<Student> max = new ArrayList<Student>();
+		for(int j=0;j<this.students.length;j++)
+		{
+			if(students[j].getAvgMark()==max_marks)
+			{
+				max.add(students[j]);
+			}
+		}
+		students= max.toArray(new Student[max.size()]);
+		return students;
 	}
 
 	@Override
@@ -360,7 +378,7 @@ public class StudentGroup implements StudentArrayOperation {
 		}
 		else
 		{int i;
-			for(i=0;i<students.length;i++)
+			for(i=0;i<this.students.length;i++)
 			{
 				if(students[i]==student)
 				{
